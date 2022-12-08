@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/controller/auth_controller.dart';
 import 'package:todo_app/model/note.dart';
 
@@ -19,11 +20,13 @@ class NotePage extends GetWidget<AuthController> {
           IconButton(
             onPressed: () {
               final note = Note(
-                note: noteController.text,
+                note: noteController.text.trim(),
                 date: DateTime.now(),
               );
 
-              createNote(note);
+              if (note.note.isNotEmpty) {
+                createNote(note);
+              }
               Get.back();
             },
             icon: const Icon(Icons.check),
