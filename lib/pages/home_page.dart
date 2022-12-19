@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/controller/auth_controller.dart';
 import 'package:todo_app/model/note.dart';
-import 'package:todo_app/widgets/note_page.dart';
+import 'package:todo_app/pages/note_page.dart';
 
 class HomePage extends GetWidget<AuthController> {
   const HomePage({super.key});
@@ -51,20 +51,26 @@ class HomePage extends GetWidget<AuthController> {
     );
   }
 
-  Widget buildNote(Note note) =>
-      ListTile(
+  Widget buildNote(Note note) => ListTile(
         title: Text(note.note),
-        subtitle: Text(note.date.toString()),
+        subtitle: Row(
+          children: [
+            Text(note.date.day.toString()),
+            const Text('-'),
+            Text(note.date.month.toString()),
+            const Text('-'),
+            Text(note.date.year.toString()),
+          ],
+        ),
         onTap: () {
           _alertDialog(note);
         },
       );
 
-  Stream<List<Note>> readNote() =>
-      FirebaseFirestore.instance
-          .collection('notes')
-          .snapshots()
-          .map((snapshot) =>
+  Stream<List<Note>> readNote() => FirebaseFirestore.instance
+      .collection('notes')
+      .snapshots()
+      .map((snapshot) =>
           snapshot.docs.map((doc) => Note.fromJson(doc.data())).toList());
 
   void _alertDialog(Note note) {

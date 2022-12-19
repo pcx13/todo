@@ -23,6 +23,7 @@ class LoginPage extends GetWidget<AuthController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              autofocus: true,
               controller: emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
@@ -39,8 +40,8 @@ class LoginPage extends GetWidget<AuthController> {
             ),
             const Gap(20),
             ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal,
               ),
               onPressed: () {
                 controller.login(

@@ -23,6 +23,7 @@ class SignUpPage extends GetWidget<AuthController> {
           children: [
             TextField(
               controller: emailController,
+              autofocus: true,
               decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
@@ -38,8 +39,8 @@ class SignUpPage extends GetWidget<AuthController> {
             ),
             const Gap(20),
             ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal,
               ),
               onPressed: () {
                 controller.createUser(
